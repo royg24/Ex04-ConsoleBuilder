@@ -1,44 +1,18 @@
-﻿using Ex04.Menus.Delegates;
+﻿using Ex04.Menus.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class MainMenu
+    public class MainMenu : MenuItem
     {
-        private const string k_EndString = "END";
-        MenuItem m_MainMenu;
-        public void BuildMenu(MenuItem i_Menu)
+        public MainMenu(string i_Title, int i_Index = 0) : base(i_Title, i_Index)
         {
-            string title = null, indexString = null;
-            int index;
-            Console.WriteLine(
-@"Enter the title and index of each option.
-Press END to finish."
-                            );
-            do
-            {
-                title = Console.ReadLine();
-                if(title == k_EndString)
-                {
-                    break;
-                }
-                else
-                {
-                    indexString = Console.ReadLine();
-                    if(int.TryParse(indexString, out index) == false)
-                    {
-                        //exception
-                    }
-                    else
-                    {
-                        i_Menu.SubMenu.Add(new MenuItem(title, index, i_Menu));
-                    }
-                }
-            }while (true);
+            m_ItemInTheEnd = new MenuItem("Exit", 0);
         }
     }
 }
