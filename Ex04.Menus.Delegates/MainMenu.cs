@@ -14,5 +14,22 @@ namespace Ex04.Menus.Delegates
         {
             m_ItemInTheEnd = new MenuItem("Exit", 0);
         }
+        public void RunMenu()
+        {
+            bool isPressedExit = false;
+            do
+            {
+                Show();
+                int userChoice = GetValidInput();
+                if (userChoice == 0)
+                {
+                    isPressedExit = true;
+                }
+                else
+                {
+                    SubMenu[userChoice].ShowSubMenu();
+                }
+            } while (!isPressedExit);
+        }
     }
 }

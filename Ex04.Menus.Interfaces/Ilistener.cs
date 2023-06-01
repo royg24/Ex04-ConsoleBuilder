@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    internal interface Ilistener
+    public interface IListener
     {
-        void ActionAfterClicked();
+        void ActionAfterChosen();
     }
 }

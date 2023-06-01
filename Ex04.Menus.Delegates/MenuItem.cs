@@ -67,11 +67,11 @@ namespace Ex04.Menus.Delegates
         {
             m_SubMenu.Remove(i_MenuItem.Index);
         }
-        protected virtual void OnItemChoosen()
+        protected virtual void OnItemChosen()
         {
             if (m_SubMenu.Count != 0)
             {
-                showSubMenu();
+                ShowSubMenu();
             }
             else if (ItemChoosen != null)
             {
@@ -95,7 +95,7 @@ namespace Ex04.Menus.Delegates
             o_ChoiceNum = choiceNumber;
             return isValid;
         }
-        private int getValidInput()
+        protected int GetValidInput()
         {
             int userVhoiceNumber;
             string userChoiceStr;
@@ -110,23 +110,6 @@ namespace Ex04.Menus.Delegates
 
             return userVhoiceNumber;
         }
-        public void RunMenu()
-        {
-            bool isPressedExit = false;
-            do
-            {
-                Show();
-                int userChoice = getValidInput();
-                if (userChoice == 0)
-                {
-                    isPressedExit = true;
-                }
-                else
-                {
-                    SubMenu[userChoice].OnItemChoosen();
-                }
-            } while (!isPressedExit);
-        }
         private void getItemInTheEnd()
         {
             if (this as MainMenu != null)
@@ -138,14 +121,14 @@ namespace Ex04.Menus.Delegates
 
             }
         }
-        private void showSubMenu()
+        internal void ShowSubMenu()
         {
             Show();
-            int choice = getValidInput();
-            if (choice != 0)
+            int userChoice = GetValidInput();
+            if (userChoice != 0)
             {
-                m_SubMenu[choice].OnItemChoosen();
-                OnItemChoosen();
+                m_SubMenu[userChoice].OnItemChosen();
+                OnItemChosen();
             }
             else
             {

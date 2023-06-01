@@ -5,13 +5,14 @@ using System.Runtime.CompilerServices;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class MenuItem : Ilistener
+    public class MenuItem
     {
         private const string k_ReturnString = "RETURN";
         protected string m_Title;
         protected int m_Index;
         protected Dictionary<int, SubMenu> m_SubMenu;
         protected MenuItem m_ItemInTheEnd;
+        protected List<IListener> m_Listeners = new List<IListener>();
         public string Title
         {
             get
@@ -47,6 +48,7 @@ namespace Ex04.Menus.Interfaces
         }
         protected virtual void Show()
         {
+            Console.Clear();
             Console.WriteLine("** {0} **", m_Title);
             Console.WriteLine("-----------------------");
             foreach (KeyValuePair<int, SubMenu> item in m_SubMenu)
@@ -66,9 +68,20 @@ namespace Ex04.Menus.Interfaces
         {
             m_SubMenu.Remove(i_MenuItem.Index);
         }
-        public void ActionAfterClicked()
+        public void AddToListeners(IListener i_Listener)
         {
-
+            m_Listeners.Add(i_Listener);
+        }
+        public void RemoveToListeners(IListener i_Listener)
+        {
+            m_Listeners.Remove(i_Listener);
+        }
+        public void Invoke()
+        {
+            foreach(IListener listener  in m_Listeners)
+            {
+                listener.ActionAfterChosen();
+            }
         }
         private bool isUserChoiceValid(string i_UserChoice, out int o_ChoiceNum)
         {
@@ -85,7 +98,7 @@ namespace Ex04.Menus.Interfaces
             o_ChoiceNum = choiceNumber;
             return isValid;
         }
-        private int getValidInput()
+        protected int GetValidInput()
         {
             int userVhoiceNumber;
             string userChoiceStr;
@@ -100,22 +113,20 @@ namespace Ex04.Menus.Interfaces
 
             return userVhoiceNumber;
         }
-        public void RunMenu()
+        public void OnItemChosen(SubMenu i_ItemChosen)
         {
-            bool isPressedExit = false;
-            do
+            if (i_ItemChosen.m_SubMenu.Count != 0)
             {
-                Show();
-                int userChoice = getValidInput();
-                if (userChoice == 0)
-                {
-                    isPressedExit = true;
-                }
-                else
-                {
-
-                }
-            } while (!isPressedExit);
+                Console.Clear();
+                i_ItemChosen.ShowSubMenu();
+            }
+            else if (i_ItemChosen != null)
+            {
+                Console.Clear();
+                i_ItemChosen.Invoke();
+                waitToReturn();
+                ShowSubMenu();
+            }
         }
         private void getItemInTheEnd()
         {
@@ -128,13 +139,13 @@ namespace Ex04.Menus.Interfaces
 
             }
         }
-        private void showSubMenu()
+        internal void ShowSubMenu()
         {
             Show();
-            int choice = getValidInput();
-            if (choice != 0)
+            int userChoice = GetValidInput();
+            if (userChoice != 0)
             {
-
+                OnItemChosen(m_SubMenu[userChoice]);
             }
             else
             {

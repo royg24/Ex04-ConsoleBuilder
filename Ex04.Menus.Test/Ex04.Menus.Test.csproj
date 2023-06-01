@@ -36,13 +36,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapitalsListener.cs" />
     <Compile Include="DelegatesMenu.cs" />
     <Compile Include="InterfaceMenu.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ShowDateListener.cs" />
+    <Compile Include="ShowTimeListener.cs" />
+    <Compile Include="VersionsListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ex04.Menus.Delegates">
       <HintPath>..\Ex04.Menus.Delegates\obj\Debug\Ex04.Menus.Delegates.dll</HintPath>
+    </Reference>
+    <Reference Include="Ex04.Menus.Interfaces">
+      <HintPath>..\Ex04.Menus.Interfaces\obj\Debug\Ex04.Menus.Interfaces.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
