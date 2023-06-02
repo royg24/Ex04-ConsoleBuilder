@@ -17,10 +17,12 @@ namespace Ex04.Menus.Delegates
         public void RunMenu()
         {
             bool isPressedExit = false;
+            int userChoice;
+
             do
             {
                 Show();
-                int userChoice = GetValidInput();
+                userChoice = GetValidInput();
                 if (userChoice == 0)
                 {
                     isPressedExit = true;

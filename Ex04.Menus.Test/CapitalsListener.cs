@@ -18,9 +18,9 @@ namespace Ex04.Menus.Test
             Console.WriteLine("Enter a sentence");
             string str = Console.ReadLine();
             int countCapitals = 0;
+
             foreach (char item in str)
             {
-
                 if (char.IsUpper(item))
                 {
                     countCapitals++;

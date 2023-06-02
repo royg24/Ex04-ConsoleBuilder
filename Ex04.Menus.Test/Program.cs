@@ -12,13 +12,13 @@ namespace Ex04.Menus.Test
     {
         public static void Main()
         {
-            //DelegatesMenu dm = new DelegatesMenu();
-            //dm.BuildMainMenu();
-            //dm.MainMenu.RunMenu();
+            DelegatesMenu delegatesMenu = new DelegatesMenu();
+            delegatesMenu.BuildMainMenu();
+            delegatesMenu.MainMenu.RunMenu();
 
-            InterfaceMenu im = new InterfaceMenu();
-            im.BuildMainMenu();
-            im.MainMenu.RunMenu();
+            InterfaceMenu interfaceMenu = new InterfaceMenu();
+            interfaceMenu.BuildMainMenu();
+            interfaceMenu.MainMenu.RunMenu();
         }
     }
 }

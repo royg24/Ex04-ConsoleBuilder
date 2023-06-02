@@ -64,7 +64,7 @@ namespace Ex04.Menus.Interfaces
         {
             m_SubMenu.Add(i_MenuItem.Index, i_MenuItem);
         }
-        public void RemoveItemFromMenuItem(MenuItem i_MenuItem)
+        public void RemoveItemFromMenuItem(SubMenu i_MenuItem)
         {
             m_SubMenu.Remove(i_MenuItem.Index);
         }
@@ -113,21 +113,21 @@ namespace Ex04.Menus.Interfaces
 
             return userVhoiceNumber;
         }
-        public void OnItemChosen(SubMenu i_ItemChosen)
-        {
-            if (i_ItemChosen.m_SubMenu.Count != 0)
+        public void MenuItemChosen(SubMenu i_ItemChosen)
             {
-                Console.Clear();
-                i_ItemChosen.ShowSubMenu();
+                if (i_ItemChosen.m_SubMenu.Count != 0)
+                {
+                    Console.Clear();
+                    i_ItemChosen.ShowSubMenu();
+                }
+                else if (i_ItemChosen != null)
+                {
+                    Console.Clear();
+                    i_ItemChosen.Invoke();
+                    waitToReturn();
+                    ShowSubMenu();
+                }
             }
-            else if (i_ItemChosen != null)
-            {
-                Console.Clear();
-                i_ItemChosen.Invoke();
-                waitToReturn();
-                ShowSubMenu();
-            }
-        }
         private void getItemInTheEnd()
         {
             if (this as MainMenu != null)
@@ -145,7 +145,7 @@ namespace Ex04.Menus.Interfaces
             int userChoice = GetValidInput();
             if (userChoice != 0)
             {
-                OnItemChosen(m_SubMenu[userChoice]);
+                MenuItemChosen(m_SubMenu[userChoice]);
             }
             else
             {

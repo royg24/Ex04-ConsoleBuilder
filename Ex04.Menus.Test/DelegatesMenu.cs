@@ -29,37 +29,37 @@ namespace Ex04.Menus.Test
             m_MainMenu.AddItemToMenuItem(versionAndCapitals);
             SubMenu showDate = new SubMenu("Show Date", 1);
             showDateOrTimeItem.AddItemToMenuItem(showDate);
-            showDate.ItemChoosen += ShowDate;
+            showDate.MenuItemChosen += ShowDate_MenuItemChosen;
             SubMenu showTime = new SubMenu("Show Time", 2);
             showDateOrTimeItem.AddItemToMenuItem(showTime);
-            showTime.ItemChoosen += ShowTime;
+            showTime.MenuItemChosen += ShowTime_MenuItemChosen;
             SubMenu showVersion = new SubMenu("Show Version", 1);
             versionAndCapitals.AddItemToMenuItem(showVersion);
-            showVersion.ItemChoosen += ShowVersion;
+            showVersion.MenuItemChosen += ShowVersion_MenuItemChosen;
             SubMenu countCapitals = new SubMenu("Count Capitals", 2);
             versionAndCapitals.AddItemToMenuItem(countCapitals);
-            countCapitals.ItemChoosen += CountCapitals;
+            countCapitals.MenuItemChosen += CountCapitals_MenuItemChosen;
         }
-        public void ShowTime()
+        public void ShowTime_MenuItemChosen()
         {
             Console.WriteLine("The Current time is {0}:{1}:{2}", DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
         }
-        public void ShowDate()
+        public void ShowDate_MenuItemChosen()
         {
             Console.WriteLine("The current date is {0}/{1}/{2}", DateTime.Today.Day, DateTime.Today.Month, DateTime.Today.Year);
         }
-        public void ShowVersion()
+        public void ShowVersion_MenuItemChosen()
         {
             Console.WriteLine("23.2.4.9805");
         }
-        public void CountCapitals()
+        public void CountCapitals_MenuItemChosen()
         {
             Console.WriteLine("Enter a sentence");
             string str = Console.ReadLine();
             int countCapitals = 0;
+
             foreach (char item in str)
             {
-
                 if (char.IsUpper(item))
                 {
                     countCapitals++;

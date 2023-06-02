@@ -12,5 +12,20 @@ namespace Ex04.Menus.Interfaces
         {
             m_ItemInTheEnd = new MenuItem("Back", 0);
         }
+        public void OnItemChosen(SubMenu i_ItemChosen)
+        {
+            if (i_ItemChosen.m_SubMenu.Count != 0)
+            {
+                Console.Clear();
+                i_ItemChosen.ShowSubMenu();
+            }
+            else if (i_ItemChosen != null)
+            {
+                Console.Clear();
+                i_ItemChosen.Invoke();
+                waitToReturn();
+                ShowSubMenu();
+            }
+        }
     }
 }

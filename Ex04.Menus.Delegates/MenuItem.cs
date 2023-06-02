@@ -11,7 +11,7 @@ namespace Ex04.Menus.Delegates
         protected int m_Index;
         protected Dictionary<int, SubMenu> m_SubMenu;
         protected MenuItem m_ItemInTheEnd;
-        public event Action ItemChoosen;
+        public event Action MenuItemChosen;
         public string Title
         {
             get
@@ -63,20 +63,20 @@ namespace Ex04.Menus.Delegates
         {
             m_SubMenu.Add(i_MenuItem.Index, i_MenuItem);
         }
-        public void RemoveItemFromMenuItem(MenuItem i_MenuItem)
+        public void RemoveItemFromMenuItem(SubMenu i_MenuItem)
         {
             m_SubMenu.Remove(i_MenuItem.Index);
         }
-        protected virtual void OnItemChosen()
+        protected virtual void OnMenuItemChosen()
         {
             if (m_SubMenu.Count != 0)
             {
                 ShowSubMenu();
             }
-            else if (ItemChoosen != null)
+            else if (MenuItemChosen != null)
             {
                 Console.Clear();
-                ItemChoosen.Invoke();
+                MenuItemChosen.Invoke();
                 waitToReturn();
             }
         }
@@ -127,8 +127,8 @@ namespace Ex04.Menus.Delegates
             int userChoice = GetValidInput();
             if (userChoice != 0)
             {
-                m_SubMenu[userChoice].OnItemChosen();
-                OnItemChosen();
+                m_SubMenu[userChoice].OnMenuItemChosen();
+                OnMenuItemChosen();
             }
             else
             {
